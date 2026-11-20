@@ -5,8 +5,10 @@ Esta práctica simula el mantenimiento de una tabla de vendedores. Usa datos fic
 ## Archivos
 
 - `01_preparacion.sql` crea la tabla `vendedores`, carga tres registros iniciales y consulta los nombres y las ventas de la zona Norte.
-- `02_operaciones_dml.sql` registra dos vendedores y añade tres más en una inserción masiva. Actualiza las ventas del vendedor 2, reasigna la zona de quienes superan las 10 000 unidades y verifica el borrado del vendedor de prueba.
-- `ejecutar_practica.py` crea `practica_dml.db`, ejecuta los dos archivos SQL en orden y muestra cada `SELECT` en la terminal.
+- `02_operaciones_dml.sql` registra vendedores nuevos, actualiza sus ventas y zona según las condiciones de la práctica y elimina el registro de prueba. Ambos `UPDATE` y el `DELETE` usan `WHERE`.
+- `ejecutar_practica.py` ejecuta los dos scripts en orden con SQLite y muestra el resultado de cada `SELECT`.
+- `practica_dml.db` es la base SQLite incluida con el estado final de los datos.
+- `evidencia_ejecucion.txt` contiene la salida de una ejecución desde cero.
 
 ## Cómo ejecutarlo en VS Code
 
@@ -17,11 +19,14 @@ Esta práctica simula el mantenimiento de una tabla de vendedores. Usa datos fic
    python ejecutar_practica.py
    ```
 
-3. Revisa los resultados en la terminal. `practica_dml.db` se guarda junto a los scripts. Si quieres repetir la práctica desde cero, mueve o renombra ese archivo antes de ejecutar el comando otra vez.
+3. Compara la salida con [evidencia_ejecucion.txt](evidencia_ejecucion.txt). El comando crea una base nueva en `salida/practica_dml.db`. Para repetirlo, mueve o renombra el archivo dentro de `salida/`.
 
 ## Resultados esperados
 
-- La consulta inicial del Norte devuelve a Ana Torres (8 200) y Carla Medina (10 000).
-- Las ventas del vendedor 2 pasan de 9 750 a 10 250.
-- Los vendedores 2 y 4 quedan en la zona Internacional. Carla se queda en el Norte con exactamente 10 000.
-- El resultado final contiene siete vendedores y `registros_de_prueba` devuelve `0`.
+| Operación | Resultado |
+| --- | --- |
+| Consulta inicial del Norte | Ana Torres (8 200) y Carla Medina (10 000). |
+| Dos altas y una inserción masiva de tres | Se agregan los IDs 4 y 5. La inserción opcional agrega los IDs 6, 7 y 8. |
+| Suma de 500 al vendedor 2 | Pasa de 9 750 a 10 250. |
+| Reasignación de zona | Los IDs 2 y 4 pasan a Internacional. Carla sigue en Norte con exactamente 10 000. |
+| Borrado por ID | El ID 5 aparece antes del `DELETE`. El `SELECT` final devuelve `registros_de_prueba = 0` y quedan siete vendedores. |

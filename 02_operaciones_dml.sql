@@ -11,6 +11,12 @@ VALUES
     (7, 'Felipe Soto', 6900, 'Norte', '2025-05-05'),
     (8, 'Gabriela Vega', 9100, 'Sur', '2025-05-12');
 
+-- Comprobar las cinco altas antes de modificar o eliminar vendedores.
+SELECT id, nombre
+FROM vendedores
+WHERE id BETWEEN 4 AND 8
+ORDER BY id;
+
 -- Ver el total del vendedor 2 antes de registrar la nueva venta.
 SELECT id, nombre, ventas_totales
 FROM vendedores

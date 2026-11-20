@@ -1,0 +1,65 @@
+--- 01_preparacion.sql ---
+
+CREATE TABLE vendedores ( id INTEGER PRIMARY KEY, nombre TEXT NOT NULL, ventas_totales INTEGER NOT NULL CHECK (ventas_totales >= 0), zona TEXT NOT NULL, fecha_ingreso TEXT NOT NULL );
+
+INSERT INTO vendedores (id, nombre, ventas_totales, zona, fecha_ingreso) VALUES (1, 'Ana Torres', 8200, 'Norte', '2025-01-13'), (2, 'Bruno Rojas', 9750, 'Sur', '2025-02-03'), (3, 'Carla Medina', 10000, 'Norte', '2025-03-17');
+Filas afectadas: 3
+
+SELECT nombre, ventas_totales FROM vendedores WHERE zona = 'Norte' ORDER BY id;
+nombre | ventas_totales
+Ana Torres | 8200
+Carla Medina | 10000
+
+--- 02_operaciones_dml.sql ---
+
+INSERT INTO vendedores (id, nombre, ventas_totales, zona, fecha_ingreso) VALUES (4, 'Diego Paredes', 11200, 'Sur', '2025-04-07'), (5, 'Vendedor de prueba', 0, 'Centro', '2025-04-10');
+Filas afectadas: 2
+
+INSERT INTO vendedores (id, nombre, ventas_totales, zona, fecha_ingreso) VALUES (6, 'Elena Ruiz', 4600, 'Centro', '2025-04-21'), (7, 'Felipe Soto', 6900, 'Norte', '2025-05-05'), (8, 'Gabriela Vega', 9100, 'Sur', '2025-05-12');
+Filas afectadas: 3
+
+SELECT id, nombre FROM vendedores WHERE id BETWEEN 4 AND 8 ORDER BY id;
+id | nombre
+4 | Diego Paredes
+5 | Vendedor de prueba
+6 | Elena Ruiz
+7 | Felipe Soto
+8 | Gabriela Vega
+
+SELECT id, nombre, ventas_totales FROM vendedores WHERE id = 2;
+id | nombre | ventas_totales
+2 | Bruno Rojas | 9750
+
+UPDATE vendedores SET ventas_totales = ventas_totales + 500 WHERE id = 2;
+Filas afectadas: 1
+
+SELECT id, nombre, ventas_totales FROM vendedores WHERE ventas_totales > 10000 ORDER BY id;
+id | nombre | ventas_totales
+2 | Bruno Rojas | 10250
+4 | Diego Paredes | 11200
+
+UPDATE vendedores SET zona = 'Internacional' WHERE ventas_totales > 10000;
+Filas afectadas: 2
+
+SELECT id, nombre FROM vendedores WHERE id = 5;
+id | nombre
+5 | Vendedor de prueba
+
+DELETE FROM vendedores WHERE id = 5;
+Filas afectadas: 1
+
+SELECT id, nombre, ventas_totales, zona, fecha_ingreso FROM vendedores ORDER BY id;
+id | nombre | ventas_totales | zona | fecha_ingreso
+1 | Ana Torres | 8200 | Norte | 2025-01-13
+2 | Bruno Rojas | 10250 | Internacional | 2025-02-03
+3 | Carla Medina | 10000 | Norte | 2025-03-17
+4 | Diego Paredes | 11200 | Internacional | 2025-04-07
+6 | Elena Ruiz | 4600 | Centro | 2025-04-21
+7 | Felipe Soto | 6900 | Norte | 2025-05-05
+8 | Gabriela Vega | 9100 | Sur | 2025-05-12
+
+SELECT COUNT(*) AS registros_de_prueba FROM vendedores WHERE id = 5;
+registros_de_prueba
+0
+
+Base de datos guardada en salida/practica_dml.db
